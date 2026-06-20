@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DSTTE Bihar Chatbot</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="header">
+  <div class="header-logo">D</div>
+  <div class="header-text">
+    <h1>DSTTE Bihar Chatbot</h1>
+    <p>Directorate of Science, Technology & Technical Education, Bihar</p>
+  </div>
+  <div class="menu-wrapper">
+    <button class="dots-btn" onclick="toggleMenu()" title="Options">⋮</button>
+    <div class="dropdown" id="dropdown">
+      <div class="dropdown-item" onclick="newChat()"><span class="di">💬</span> New Chat</div>
+      <div class="dropdown-item" onclick="openHistory()"><span class="di">🕘</span> Chat History</div>
+      <div class="dropdown-item" onclick="clearChat()"><span class="di">🗑️</span> Clear Chat</div>
+      <div class="dropdown-item" onclick="copyLastResponse()"><span class="di">📋</span> Copy Last Response</div>
+      <div class="dropdown-item" onclick="exportChat()"><span class="di">⬇️</span> Export Chat</div>
+      <div class="dropdown-item" onclick="showAbout()"><span class="di">ℹ️</span> About this Chatbot</div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="sidebar">
+    <div>
+      <h2>📌 About This Chatbot</h2>
+      <div class="about-box">
+        This chatbot is based on the official data of <strong>DSTTE Bihar</strong> technical colleges.<br><br>
+        It provides information about <strong>Engineering</strong> and <strong>Polytechnic</strong> colleges across all districts of Bihar.
+      </div>
+    </div>
+    <div class="info-section">
+      <h3>📂 What Information Is Available?</h3>
+      <ul class="info-list">
+        <li><span class="icon">🎓</span> Branch-wise registered student count</li>
+        <li><span class="icon">🏠</span> District-wise hostel and bed availability</li>
+        <li><span class="icon">👨‍🏫</span> College-wise professor statistics</li>
+        <li><span class="icon">💼</span> Year-wise placement reports</li>
+        <li><span class="icon">📋</span> District-wise admission reports</li>
+      </ul>
+    </div>
+    <div class="sample-section">
+      <h3>💬 Sample Questions</h3>
+      <div class="sample-q" onclick="fillInput(this)">How many engineering colleges are in Patna?</div>
+      <div class="sample-q" onclick="fillInput(this)">How many students are registered in CSE branch?</div>
+      <div class="sample-q" onclick="fillInput(this)">What is the total number of hostel beds in Bihar?</div>
+      <div class="sample-q" onclick="fillInput(this)">What was the placement rate in 2023?</div>
+      <div class="sample-q" onclick="fillInput(this)">How many professors are there in Gaya district?</div>
+    </div>
+    <div class="disclaimer">
+      ⚠️ This data is based on official DSTTE Bihar records. Please visit the official website for any discrepancies.
+    </div>
+  </div>
+
+  <div class="chat-area">
+    <div class="chat-messages" id="chatMessages">
+      <div class="welcome-card">
+        <div class="emoji">🏛️</div>
+        <h3>Welcome to DSTTE Bihar Chatbot!</h3>
+        <p>Ask any question about engineering and polytechnic colleges in Bihar. I'm here to help you!</p>
+      </div>
+      <div class="msg bot">
+        <div class="msg-avatar">AI</div>
+        <div class="msg-bubble">Hello! 👋 I am the official DSTTE Bihar Chatbot. I can provide information about Engineering and Polytechnic colleges across Bihar. Please ask your question in English.</div>
+      </div>
+    </div>
+    <div style="padding: 0 22px;">
+      <p class="input-hint">Ask your question here</p>
+    </div>
+    <div class="input-bar">
+      <input type="text" id="userInput" placeholder="Type your question here..." />
+      <button class="send-btn" onclick="sendMessage()">➤</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="overlay" onclick="closeHistory()"></div>
+<div class="history-panel" id="historyPanel">
+  <div class="history-header">
+    <h3>🕘 Chat History</h3>
+    <button class="history-close" onclick="closeHistory()">✕</button>
+  </div>
+  <div class="history-search">
+    <input type="text" id="historySearch" placeholder="Search history..." oninput="renderHistory(this.value)" />
+  </div>
+  <div class="history-list" id="historyList">
+    <div class="history-empty">No chats saved yet</div>
+  </div>
+  <div class="history-footer">
+    <button class="clear-history-btn" onclick="clearAllHistory()">🗑️ Delete All History</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="script.js"></script>
+</body>
+</html>
