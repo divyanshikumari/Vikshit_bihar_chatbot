@@ -1,11 +1,20 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
 from database import get_connection
 from gemini_service import generate_sql, format_answer
 
 app = FastAPI()
+
+# Serve Frontend Files
+app.mount("/static", StaticFiles(directory="frontend"), name="static")
+
+@app.get("/")
+def serve_frontend():
+    return FileResponse("frontend/index.html")
 
 # CORS
 app.add_middleware(
@@ -41,14 +50,6 @@ def normalize_question(question):
         q = q.replace(short_name, full_name)
 
     return q
-
-
-@app.get("/")
-def home():
-
-    return {
-        "message": "DSTTE Bihar Chatbot API Running"
-    }
 
 
 @app.get("/tables")
